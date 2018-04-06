@@ -1,0 +1,81 @@
+---
+title: "R Markdown Tutorial"
+author: "AJ Smit"
+date: "23 March 2016"
+output:
+  html_document:
+    fig_caption: yes
+    fig_height: 6
+    fig_width: 3.5
+    highlight: default
+    number_sections: yes
+    theme: paper
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    fig_caption: yes
+    fig_height: 3.5
+    fig_width: 6
+    highlight: zenburn
+    latex_engine: xelatex
+  word_document:
+    toc: yes
+mainfont: PT Serif
+monofont: PT Mono
+language: Australian
+sansfont: PT Sans
+fontsize: 10pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# R Markdown
+
+This is an R Markdown document (if you are viewing the .Rmd file) or one produced from R Markdown (in case you are viewing an .html, .pdf or .doc file). Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button (with the option to multiple document kinds) a document will be generated that includes both content as well as the output of any embedded R code chunks (portions of R code surrounded by code that denotes the R commands) within the document. R code chunks can be used to render R output into documents or to simply display code for illustration. 
+
+> Tip:
+In order to use this tutorial effectively, please examine the R Markdown file (called 'R_Markdown_Tutorial.Rmd') in conjunction with the output document (i.e. 'R_Markdown_Tutorial.html', 'R_Markdown_Tutorial.pdf' or 'R_Markdown_Tutorial.doc'). Open the .Rmd file in the RStudio editor, and press the **Knit** icon to run it. The .html file will appear in the Viewer (if you asked it to produce the HTML file), while the .pdf and .doc files will appear in the same directory as the original .Rmd file.
+
+This is a terribly basic demonstration, but since beautiful documentation already exists I suggest you go and find the necessary examples on the R Markdown website indicated above for a more in-depth account of how to use it.
+
+# Embedding R code
+
+You can embed an R code chunk like this:
+
+```{r, results = TRUE, echo = TRUE, message = FALSE, warning = FALSE}
+x <- seq(0, 2, by = 0.01)
+df <- data.frame(x = x, y = 2 * sin(2 * pi *(x - 1/4)))
+head(df)
+```
+
+You can also embed R output directly into sentences, like so: `r x[2]`.
+
+# Including Plots
+
+You can also embed any plots produced by R, for example:
+```{r, results = TRUE, echo = TRUE, message = FALSE, warning = FALSE, fig.height = 3.2, fig.cap = "My first R plot."}
+plot(df$x, df$y, xlab = "x-label", ylab = "y-label")
+```
+
+Notice, above, how the first line specifying the start of the R code includes some specifications with regards to the size of the figure, its caption, etc. Note too that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot. The options `results = TRUE`, `message = TRUE` and `warning = TRUE` have similar functions. Info on the other code chunk options can be found at the [R Markdown website](http://rmarkdown.rstudio.com/authoring_rcodechunks.html) or in the Cheatsheets and other documentation accessible via the Rstudio Help facility (see menu, above).
+
+> HTML hyperlinks:
+See how the code above also demonstrates how to embed links to external websites.
+
+# External images
+
+Images stored on your computer can be embedded like this:
+
+```{r echo=FALSE, fig.align = "centre", fig.cap="R Core Team (2015). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/."}
+library(png); library(grid)
+img <- readPNG("Rlogo.png")
+grid.raster(img)
+```
+
+Notice that in order to display images in this way we need to draw on a few R functions in the packages `png` and `grid`, which allow one to display images as rasters. These same functions can be used for image processing and GIS analysis in R.
+
+
